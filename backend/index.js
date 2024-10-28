@@ -3,6 +3,13 @@ const bodyparser = require("body-parser");
 const multer = require("multer");
 const path = require("path");
 const { v4: uuidv4 } = require('uuid');
+const cors = require('cors');
+
+const corsOptions = {
+    origin: '*', // Permite todas as origens
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Métodos permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
+};
 
 const storage = multer.diskStorage({
     // Configura ONDE será salvo o arquivo depois de enviado.
@@ -42,6 +49,7 @@ async function deleteFile(caminho, pasta = "imagens/") {
     }
 }
 
+app.use(cors(corsOptions));
 app.use("/", bodyparser.json());
 
 /* Cadastrar um novo perfil no sistema. Requer "login" e "foto". */
@@ -60,7 +68,6 @@ app.post("/perfil", (req, res) => {
 
         // Não pode haver 2 usuários com mesmo "login". Verifica se já existe algum.
         const existe = await banco.existeLogin(req.body.login);
-        console.log(existe);
         if (existe) {
             // Remove o arquivo que acabou de ser enviado, se houver.
             deleteFile(req.file.filename);
