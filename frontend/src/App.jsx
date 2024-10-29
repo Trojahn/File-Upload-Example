@@ -59,6 +59,7 @@ function App() {
     }
     alert("Cadastrado com sucesso!");
     resetForm();
+    carregarDados();
   }
 
   function changeFile(e) {
