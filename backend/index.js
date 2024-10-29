@@ -78,7 +78,7 @@ app.post("/perfil", (req, res) => {
         if (!sucesso) {
             // Remove o arquivo que acabou de ser enviado, se houver.
             deleteFile(req.file.filename);
-            res.status(500).send({ msg: "Erro ao realizar o cadastro de perfil" });
+            return res.status(500).send({ msg: "Erro ao realizar o cadastro de perfil" });
         }
         return res.status(201).send({ msg: "Perfil cadastrado com sucesso!" });
     });
@@ -93,7 +93,7 @@ app.get("/perfil", async (req, res) => {
 app.get("/perfil/:id/foto", async (req, res) => {
     const existe = await banco.existeId(req.params.id);
     if (!existe) {
-        res.status(404).send({ msg: "ID não encontrado" });
+        return res.status(404).send({ msg: "ID não encontrado" });
     }
     const resposta = await banco.obterFotoPorId(req.params.id);
     res.sendFile(path.join(__dirname, `imagens/${resposta}`));
@@ -108,14 +108,14 @@ app.get("/foto/:path", async (req, res) => {
 app.delete("/perfil/:id", async (req, res) => {
     const existe = await banco.existeId(req.params.id);
     if (!existe) {
-        res.status(404).send({ msg: "ID não encontrado" });
+        return res.status(404).send({ msg: "ID não encontrado" });
     }
 
     const foto = await banco.obterFotoPorId(req.params.id);
 
     const resposta = await banco.removerPerfilPorId(req.params.id);
     if (!resposta) {
-        res.status(400).send({ msg: "Erro ao deletar o perfil" });
+        return res.status(400).send({ msg: "Erro ao deletar o perfil" });
     }
     // Deu certo, o banco de dados foi modificado, hora de apagar a imagem do sistema.
     deleteFile(foto);
