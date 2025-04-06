@@ -26,3 +26,14 @@ npm run dev
 ## ☕ Usando
 
 Acesse a url do serviço em execução. Em geral, o endereço `http://localhost:5173/` é geralmente utilizado.
+
+## Docker
+
+Para fins didáticos, sem usar o docker-composer, foi criado um DockerFile para praticar. Após a execução dos comandos Docker do backend (e checar que estão operacionais!), siga os seguintes passos:
+
+```
+docker build -t imgfrontend .
+docker run -d --name frontend --network fileupload -p 3000:3000 imgfrontend
+```
+
+Depois disso, basta acessar com o navegador a página `http://localhost:3000`

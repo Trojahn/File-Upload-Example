@@ -1,19 +1,13 @@
-FROM node:20
-
-# Diretório de trabalho
+# Etapa 1 - Build do Vite
+FROM node:20 AS builder
 WORKDIR /app
-
-# Copia os arquivos de dependência
-COPY package*.json ./
-
-# Instala as dependências
-RUN npm install
-
-# Copia o restante dos arquivos do projeto
 COPY . .
+RUN npm install && npm run build
 
-# Expõe a porta padrão do Vite
-EXPOSE 5173
+# Etapa 2 - Servindo com nginx
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Comando para iniciar o Vite
-CMD ["npm", "run", "dev", "--", "--host"]
+EXPOSE 3000
+CMD ["nginx", "-g", "daemon off;"]

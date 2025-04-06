@@ -42,7 +42,7 @@ As rotas disponíveis e seus propósitos são:
 - POST `/perfil` - Insere um novo perfil no sistema. Deve ser enviado no corpo da requisição os parâmetros **login** e **foto**, ambos no formato *multipart/form-data*.
 - DELETE `/perfil/id` - Remove o perfil do sistema, removendo também a foto associada ao perfil.
 
-## DockerFile
+## Docker
 
 Para fins didáticos, sem usar o docker-composer, foram criados dois DockerFiles para praticar. Nessa situação, execute os seguintes passos na ordem dada:
 
