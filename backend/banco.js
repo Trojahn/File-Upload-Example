@@ -6,7 +6,7 @@ async function conecta() {
         port: 3306,
         database: "exemplo_upload_arquivo",
         user: "root",
-        password: ""
+        password: "123456"
     });
     return conexao;
 }
