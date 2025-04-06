@@ -41,3 +41,19 @@ As rotas disponíveis e seus propósitos são:
 - GET `/foto/xxxxx` - Retorna a imagem cujo nome complete é **xxxxx**. Este é o valor retornado para a *foto* na rota `/perfil`.
 - POST `/perfil` - Insere um novo perfil no sistema. Deve ser enviado no corpo da requisição os parâmetros **login** e **foto**, ambos no formato *multipart/form-data*.
 - DELETE `/perfil/id` - Remove o perfil do sistema, removendo também a foto associada ao perfil.
+
+## DockerFile
+
+Para fins didáticos, sem usar o docker-composer, foram criados dois DockerFiles para praticar. Nessa situação, execute os seguintes passos na ordem dada:
+
+```
+docker network create fileupload
+docker build -f .\Dockerfile.database -t imgbanco .
+docker run -d --name banco --network fileupload imgbanco
+docker run -d --name banco --network fileupload -p 3306:3306 imgbanco
+
+docker build -f .\Dockerfile.backend imgbackend .
+docker run -d --name backend --network fileupload -p 8000:8000 imgbackend
+```
+
+Depois disso, basta acessar com o navegador a página `http://localhost:8000/perfil`

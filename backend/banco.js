@@ -1,12 +1,13 @@
 const bd = require("mysql2/promise");
+require("dotenv").config();
 
 async function conecta() {
     const conexao = await bd.createConnection({
-        host: "localhost",
-        port: 3306,
-        database: "exemplo_upload_arquivo",
-        user: "root",
-        password: "123456"
+        host: process.env.DB_HOST || "localhost",
+        port: process.env.DB_PORT || 3306,
+        database: process.env.DB_NAME || "exemplo_upload_arquivo",
+        user: process.env.DB_USER || "fileupload",
+        password: process.env.DB_PASSWORD || "fileuploadsenha"
     });
     return conexao;
 }
