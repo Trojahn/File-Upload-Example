@@ -49,7 +49,6 @@ Para fins didáticos, sem usar o docker-composer, foram criados dois DockerFiles
 ```
 docker network create fileupload
 docker build -f .\Dockerfile.database -t imgbanco .
-docker run -d --name banco --network fileupload imgbanco
 docker run -d --name banco --network fileupload -p 3306:3306 imgbanco
 
 docker build -f .\Dockerfile.backend imgbackend .

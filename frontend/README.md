@@ -25,7 +25,7 @@ npm run dev
 
 ## ☕ Usando
 
-Acesse a url do serviço em execução. Em geral, o endereço `http://localhost:5173/` é geralmente utilizado.
+Acesse a url do serviço em execução. Em geral, o endereço `http://localhost:5173/` é geralmente utilizado. Caso acesse via Docker, use o endereço `http://localhost:3000`.
 
 ## Docker
 
