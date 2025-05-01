@@ -49,9 +49,9 @@ Para fins didáticos, sem usar o docker-composer, foram criados dois DockerFiles
 ```
 docker network create fileupload
 docker build -f .\Dockerfile.database -t imgbanco .
-docker run -d --name banco --network fileupload -p 3306:3306 imgbanco
+docker run -d --name banco --network fileupload -p 3307:3306 imgbanco
 
-docker build -f .\Dockerfile.backend imgbackend .
+docker build -f .\Dockerfile.backend -t imgbackend .
 docker run -d --name backend --network fileupload -p 8000:8000 imgbackend
 ```
 
